@@ -1,11 +1,11 @@
 ## Tutorial Video
 
-- blibli : https://www.bilibili.com/video/BV1Xw411f7FW (Now only in Chinese. English is comming)
-- slides : http://zifuture.com:1556/fs/sxai/tensorRT.pptx (Now only in Chinese. English is comming)
+- <b>blibli</b> : https://www.bilibili.com/video/BV1Xw411f7FW (Now only in Chinese. English is comming)
+- <b>slides</b> : http://zifuture.com:1556/fs/sxai/tensorRT.pptx (Now only in Chinese. English is comming)
 
-## An out-of-the-box TensorRT-based Framework for  High Performance Inference with C++/Python support
+## An Out-of-the-Box TensorRT-based Framework for High Performance Inference with C++/Python Support
 
-- C++ interface: 3 lines of code is all you need to run a YoloX
+- C++ Interface: 3 lines of code is all you need to run a YoloX
 
   ```C++
   // create inference engine on gpu-0
@@ -19,7 +19,7 @@
   auto box = engine->commit(image).get();  // return vector<Box>
   ```
 
-- Python interface:
+- Python Interface:
 
   ```python
   import trtpy
@@ -29,7 +29,7 @@
   trt_out   = trt_model(input)
   ```
 
-## Intro
+## INTRO
 
 1. High level interface for C++/Python.
 2. Based on TensorRT8.0.
@@ -50,9 +50,9 @@
 6. num of testing: take the average on the results of 100 times but excluding the first time for warmup 
 7. Testing log: [workspace/perf.result.std.log (workspace/perf.result.std.log)
 8. code for testing: [src/application/app_yolo.cpp](src/application/app_yolo.cpp)
-9. images for testing: 6 images in workspace/inference with resolution 810x1080，500x806，1024x684，550x676，1280x720，800x533 respetively
+9. images for testing: 6 images in workspace/inference 
+    - with resolution 810x1080，500x806，1024x684，550x676，1280x720，800x533 respetively
 10. Testing method: load 6 images. Then do the inference on the 6 images, which will be repeated for 100 times. Note that each image should be preprocessed and postprocessed.
-
 
 ---
 
@@ -98,11 +98,12 @@
 
 <details>
 <summary>app_yolo_fast.cpp speed testing. Never stop desiring for being faster</summary>
-- Highlight: 0.5 ms faster without any loss in precision compared with the above. Specifically, we remove the Focus and some transpose nodes etc, and implement them in CUDA kenerl function. But the rest remains the same.
-- Test log: [workspace/perf.result.std.log](workspace/perf.result.std.log)
-- Code for testing: [src/application/app_yolo_fast.cpp](src/application/app_yolo_fast.cpp)
-- Tips: you can do the modification while refering to the downloaded onnx. Any questions are welcomed through any kinds of contact.
-- Conclusion: the main idea of this work is to optimize the pre-and-post processing. If you go for yolox, yolov5 small version, the optimization might help you.
+  
+- <b>Highlight:</b>   0.5 ms faster without any loss in precision compared with the above. Specifically, we remove the Focus and some transpose nodes etc, and implement them in CUDA kenerl function. But the rest remains the same.
+- <b>Test log:</b>   [workspace/perf.result.std.log](workspace/perf.result.std.log)
+- <b>Code for testing:</b>   [src/application/app_yolo_fast.cpp](src/application/app_yolo_fast.cpp)
+- <b>Tips:</b>   you can do the modification while refering to the downloaded onnx. Any questions are welcomed through any kinds of contact.
+- <b>Conclusion:</b>   the main idea of this work is to optimize the pre-and-post processing. If you go for yolox, yolov5 small version, the optimization might help you.
 
 |Model|Resolution|Type|Precision|Elapsed Time|FPS|
 |---|---|---|---|---|---|
@@ -158,29 +159,28 @@
 1. VSCode (highly recommended!)
 2. Configure your path for cudnn, cuda, tensorRT8.0 and protobuf.
 3. Configure the compute capability matched with your nvidia graphics card in Makefile/CMakeLists.txt
-  e.g.  `-gencode=arch=compute_75,code=sm_75`. 
-  If you are using 3080Ti, that should be `gencode=arch=compute_86,code=sm_86`
-  - reference for the table for GPU Compute Capability:
+    - e.g.  `-gencode=arch=compute_75,code=sm_75`. If you are using 3080Ti, that should be `gencode=arch=compute_86,code=sm_86`
+    - reference for the table for GPU Compute Capability:
   https://developer.nvidia.com/cuda-gpus#compute
 4. Configure your library path in .vscode/c_cpp_properties.json
 5. CUDA version: CUDA10.2
 6. CUDNN version: cudnn8.2.2.26. Note that dev(.h file) and runtime(.so file) should be downloaded.
 7. tensorRT version：tensorRT-8.0.1.6-cuda10.2
 8. protobuf version（for onnx parser）：protobufv3.11.4
-  - if other version, refer to the ........
-  - link for download: https://github.com/protocolbuffers/protobuf/tree/v3.11.4
-  - download, compile and replace the path in Makefile/CMakeLists.txt with new path to protobuf3.11.4
-- CMake:
+    - if other version, refer to the ........
+    - link for download: https://github.com/protocolbuffers/protobuf/tree/v3.11.4
+    - download, compile and replace the path in Makefile/CMakeLists.txt with new path to protobuf3.11.4
+  - CMake:
     - `mkdir build && cd build`
     - `cmake ..`
     - `make yolo -j8`
-- Makefile:
+  - Makefile:
     - `make yolo -j8`
   
 </details>
 
 <details>
-<summary>Linux: compile for python</summary>
+<summary>Linux: Compile for Python</summary>
 
 - compile and install
     - Makefile：
@@ -200,7 +200,7 @@
 2. In TensorRT.vcxproj, replace the `<Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.props" />` with your own CUDA path
 3. In TensorRT.vcxproj, replace the `<Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.targets" />` with your own CUDA path
 4. In TensorRT.vcxproj, replace the `<CodeGeneration>compute_61,sm_61</CodeGeneration>` with your compute capability.
-  - refer to the table in https://developer.nvidia.com/cuda-gpus#compute
+    - refer to the table in https://developer.nvidia.com/cuda-gpus#compute
   
 5. Configure your dependency or download it to the foler /lean. Configure VC++ dir (include dir and refence)
 
@@ -210,7 +210,7 @@
 </details>
 
 <details>
-<summary>Windows: for compile for Python</summary>
+<summary>Windows: Compile for Python</summary>
 
   
 1. Compile trtpyc.pyd. Choose python in visual studio to compile
@@ -220,9 +220,11 @@
   - the compiled files are in `python/trtpy/libtrtpyc.pyd`
 
 </details>
+  
+  
 <details>
-
 <summary>Other Protobuf Version</summary>
+  
 - in onnx/make_pb.sh, replace the path `protoc=/data/sxai/lean/protobuf3.11.4/bin/protoc` in protoc with the protoc of your own version
 
 ```bash
@@ -234,7 +236,7 @@ bash make_pb.sh
 ```
   
 - CMake:
-  - replace the `set(PROTOBUF_DIR "/data/sxai/lean/protobuf3.11.4")` in CMakeLists.txt with the same path of your protoc.
+    - replace the `set(PROTOBUF_DIR "/data/sxai/lean/protobuf3.11.4")` in CMakeLists.txt with the same path of your protoc.
 
 ```bash
 mkdir build && cd build
@@ -250,6 +252,9 @@ make yolo -j64
 
 </details>
   
+  
+  
+  
 ## Guide for Different Tasks/Model Support
 <details>
 <summary>YoloV5 Support</summary>
@@ -259,13 +264,13 @@ make yolo -j64
 - if you want to achieve the inference with lower pytorch, dynamic batchsize and other advanced setting, please check our blog (http://zifuture.com:8090)(now in Chinese) and scan the QRcode via Wechat to join us.
 
                   
-1. download yolov5
+1. Download yolov5
 
 ```bash
 git clone git@github.com:ultralytics/yolov5.git
 ```
 
-2. modify the code for dynamic batchsize
+2. Modify the code for dynamic batchsize
 ```python
 # line 55 forward function in yolov5/models/yolo.py 
 # bs, _, ny, nx = x[i].shape  # x(bs,255,20,20) to x(bs,3,20,20,85)
@@ -290,12 +295,12 @@ z.append(y.view(bs, self.na * ny * nx, self.no))
 torch.onnx.export(dynamic_axes={'images': {0: 'batch'},  # shape(1,3,640,640)
                                 'output': {0: 'batch'}  # shape(1,25200,85) 
 ```
-3. export to onnx model
+3. Export to onnx model
 ```bash
 cd yolov5
 python export.py --weights=yolov5s.pt --dynamic --include=onnx --opset=11
 ```
-4.copy the model and execute it
+4. Copy the model and execute it
 ```bash
 cp yolov5/yolov5m.onnx tensorRT_cpp/workspace/
 cd tensorRT_cpp
@@ -307,6 +312,7 @@ make yolo -j32
 
 <details>
 <summary>YoloX Support</summary>
+  
 - download from: https://github.com/Megvii-BaseDetection/YOLOX
 - If you don't want to export onnx by yourself, just make run in the repo of Megavii
 
@@ -345,7 +351,7 @@ wh = torch.exp(outputs[..., 2:4]) * strides
 return torch.cat((xy, wh, outputs[..., 4:]), dim=-1)
 
 
-3. export to onnx
+3. Export to onnx
 ```bash
 
 # download model
@@ -355,7 +361,7 @@ return torch.cat((xy, wh, outputs[..., 4:]), dim=-1)
 python tools/export_onnx.py -c yolox_m.pth -f exps/default/yolox_m.py --output-name=yolox_m.onnx --dynamic --no-onnxsim
 ```
 
-4.execute the command
+4. Execute the command
 ```bash
 cp YOLOX/yolox_m.onnx tensorRT_cpp/workspace/
 cd tensorRT_cpp
@@ -369,7 +375,7 @@ make yolo -j32
 
 - https://github.com/biubug6/Pytorch_Retinaface
 
-1. Download Pytorch_Retinaface
+1. Download Pytorch_Retinaface Repo
 
 ```bash
 git clone git@github.com:biubug6/Pytorch_Retinaface.git
@@ -424,12 +430,12 @@ torch_out = torch.onnx._export(net, inputs, output_onnx, export_params=True, ver
 
 
 ```
-4. export to onnx
+4. Export to onnx
 ```bash
 python convert_to_onnx.py
 ```
 
-5. execute
+5. Execute
 ```bash
 cp FaceDetector.onnx ../tensorRT_cpp/workspace/mb_retinaface.onnx
 cd ../tensorRT_cpp
@@ -465,10 +471,10 @@ cout << feature << endl;  // 1x512
 </details>
 
 
-## the Intro to Interface
+## the INTRO to Interface
 
 <details>
-<summary>Python interface：Get onnx and trtmodel from pytorch model more easily</summary>
+<summary>Python Interface：Get onnx and trtmodel from pytorch model more easily</summary>
 
 - Just one line of code to export onnx and trtmodel. And save them for usage in the future.
 ```python
@@ -489,7 +495,7 @@ trtpy.from_torch(
 <details>
 <summary>Python Interface：TensorRT Inference</summary>
 
-- YoloX tensorRT inference
+- YoloX TensorRT Inference
 ```python
 import trtpy
 
@@ -498,7 +504,7 @@ image  = cv2.imread("inference/car.jpg")
 bboxes = yolo.commit(image).get()
 ```
 
-- Seamless Inference from Pytorch to tensorRT
+- Seamless Inference from Pytorch to TensorRT
 ```python
 import trtpy
 
@@ -649,7 +655,7 @@ RegisterPlugin(HSwish);
 </details>
 
 
-## About us
+## About Us
 - Our blog：http://www.zifuture.com/                        (Now only in Chinese. English is comming)
 - Our video channel： https://space.bilibili.com/1413433465 (Now only in Chinese. English is comming)
 
