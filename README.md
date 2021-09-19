@@ -29,7 +29,7 @@
   trt_out   = trt_model(input)
   ```
 
-## Introduction
+## Intro
 
 1. High level interface for C++/Python.
 2. Based on TensorRT8.0.
@@ -41,6 +41,7 @@
 
 <details>
 <summary>app_yolo.cpp speed testing</summary>
+  
 1. Resolution (YoloV5P5, YoloX) = (640x640),  (YoloV5P6) = (1280x1280)
 2. max batch size = 16
 3. preprocessing + inference + postprocessing
