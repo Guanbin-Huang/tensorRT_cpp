@@ -1,7 +1,7 @@
 ## Tutorial Video
 
-- blibli : https://www.bilibili.com/video/BV1Xw411f7FW (in Chinese)
-- slides : http://zifuture.com:1556/fs/sxai/tensorRT.pptx (in Chinese)
+- blibli : https://www.bilibili.com/video/BV1Xw411f7FW (Now only in Chinese. English is comming)
+- slides : http://zifuture.com:1556/fs/sxai/tensorRT.pptx (Now only in Chinese. English is comming)
 
 ## An out-of-the-box TensorRT-based Framework for  High Performance Inference with C++/Python support
 
@@ -149,9 +149,11 @@
 <details>
 <summary>Linux
 
+ 
 - complied dependency (Out of the Box feature)
   - link for download [lean-tensorRT8.0.1.6-protobuf3.11.4-cudnn8.2.2.tar.gz]
   (http://zifuture.com:1556/fs/25.shared/lean-tensorRT8.0.1.6-protobuf3.11.4-cudnn8.2.2.tar.gz)
+  
   
 1. VSCode (highly recommended!)
 2. Configure your path for cudnn, cuda, tensorRT8.0 and protobuf.
@@ -193,6 +195,7 @@
 <details>
 <summary>Windows</summary>
 
+  
 1. Please check the [lean/README.md](lean/README.md) for the detailed dependency
 2. In TensorRT.vcxproj, replace the `<Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.props" />` with your own CUDA path
 3. In TensorRT.vcxproj, replace the `<Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 10.0.targets" />` with your own CUDA path
@@ -209,6 +212,7 @@
 <details>
 <summary>Windows: for compile for Python</summary>
 
+  
 1. Compile trtpyc.pyd. Choose python in visual studio to compile
 2. Copy dll and execute 'python/copy_dll_to_trtpy.bat'
 3. Execute the example in python dir by 'python test_yolov5.py'
@@ -249,10 +253,12 @@ make yolo -j64
 ## Guide for Different Tasks/Model Support
 <details>
 <summary>YoloV5 Support</summary>
+  
 - if pytorch >= 1.7, and the model is 5.0+, the model is suppored by the framework 
 - if pytorch < 1.7 or yolov5(2.0, 3.0 or 4.0), minor modification should be done in opset.
 - if you want to achieve the inference with lower pytorch, dynamic batchsize and other advanced setting, please check our blog (http://zifuture.com:8090)(now in Chinese) and scan the QRcode via Wechat to join us.
 
+                  
 1. download yolov5
 
 ```bash
